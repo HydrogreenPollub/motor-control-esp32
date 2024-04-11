@@ -13,5 +13,8 @@
     "idf.pythonBinPath": "/home/ergoash/.espressif/python_env/idf5.1_py3.11_env/bin/python",
     "idf.toolsPath": "/home/ergoash/.espressif",
     "idf.port": "/dev/ttyACM0",
-    "idf.flashType": "UART"
+    "idf.flashType": "UART",
+    "files.associations": {
+        "esp_timer.h": "c"
+    }
 }

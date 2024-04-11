@@ -2,11 +2,15 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-#include "esp_log.h"
+
 #include "driver/pulse_cnt.h"
 #include "driver/gpio.h"
+
+#include "esp_log.h"
 #include "esp_sleep.h"
 #include "esp_timer.h"
+
+#include "CANopenNode_ESP32.h"
 
 static const char *TAG = "MCU";
 static pcnt_unit_handle_t pcnt_unit = NULL;
@@ -82,6 +86,8 @@ static void configure_speed_calc_timer() {
 
 void app_main(void)
 {
+    CO_ESP32_init();
+
     configure_pulse_counter();
     configure_speed_calc_timer();
 
