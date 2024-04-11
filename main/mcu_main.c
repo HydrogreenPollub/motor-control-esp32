@@ -11,6 +11,7 @@
 #include "esp_timer.h"
 
 #include "CANopenNode_ESP32.h"
+#include "OD.h"
 
 static const char *TAG = "MCU";
 static pcnt_unit_handle_t pcnt_unit = NULL;
@@ -29,6 +30,10 @@ static void speed_timer_on_tick(void* arg)
     if (pulses > 0) {
         ESP_LOGI(TAG, "Vehicle speed: %.3f km/h (%d pulses)", speed, pulses);
         pcnt_unit_clear_count(pcnt_unit);
+        //CO_TPDOsendRequest();
+        //OD_requestTPDO()
+        
+        OD_RAM.x6400_vehicleSpeed = speed;
     }
 }
 
