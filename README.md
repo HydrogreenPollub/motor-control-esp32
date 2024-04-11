@@ -1,1 +1,2 @@
-# motor-control-esp32
+# Motor control unit
+MCU-ESP32

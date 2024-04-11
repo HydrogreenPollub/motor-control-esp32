@@ -1,0 +1,40 @@
+menu "Motor Control Unit configuration"
+
+    menu "Speed pulse count settings"
+        config SPEED_SENSOR_GPIO_NUM
+            int "Speed sensor GPIO number"
+            default 26
+            help
+                GPIO number for photodiode pulse generator (encoder with 6 obstacles)
+
+        config SPEED_PCNT_LOW_LIMIT
+            int "Speed pulse low limit"
+            default -1000
+
+        config SPEED_PCNT_HIGH_LIMIT
+            int "Speed pulse high limit"
+            default 1000
+
+    endmenu
+    
+    menu "ADC channels"
+        config I2C_MASTER_SCL
+            int "SCL GPIO Num"
+            default 4
+            help
+                GPIO number for I2C Master clock line.
+
+        config I2C_MASTER_SDA
+            int "SDA GPIO Num"
+            default 5
+            help
+                GPIO number for I2C Master data line.
+
+        config I2C_MASTER_FREQUENCY
+            int "Master Frequency"
+            default 400000
+            help
+                I2C Speed of Master device.
+    endmenu
+
+endmenu
