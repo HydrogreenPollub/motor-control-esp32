@@ -23,21 +23,23 @@ uint32_t speed_calc_tick_ms = 500;
 
 int pulses = 0;
 
-static void speed_timer_on_tick(void* arg)
+static void speed_timer_on_tick(void *arg)
 {
     ESP_ERROR_CHECK(pcnt_unit_get_count(pcnt_unit, &pulses));
-    float speed = pi * diameter * ((float) pulses / pulses_per_revolution) * (3.6f * 1000 / speed_calc_tick_ms);
-    if (pulses > 0) {
+    float speed = pi * diameter * ((float)pulses / pulses_per_revolution) * (3.6f * 1000 / speed_calc_tick_ms);
+    if (pulses > 0)
+    {
         ESP_LOGI(TAG, "Vehicle speed: %.3f km/h (%d pulses)", speed, pulses);
         pcnt_unit_clear_count(pcnt_unit);
-        //CO_TPDOsendRequest();
-        //OD_requestTPDO()
-        
+        // CO_TPDOsendRequest();
+        // OD_requestTPDO()
+
         OD_RAM.x6400_vehicleSpeed = speed;
     }
 }
 
-static void configure_pulse_counter() {
+static void configure_pulse_counter()
+{
     ESP_LOGI(TAG, "install pcnt unit");
     pcnt_unit_config_t unit_config = {
         .high_limit = CONFIG_SPEED_PCNT_HIGH_LIMIT,
@@ -78,11 +80,9 @@ static void configure_pulse_counter() {
 #endif
 }
 
-static void configure_speed_calc_timer() {
-    const esp_timer_create_args_t periodic_timer_args = {
-        .callback = &speed_timer_on_tick,
-        .name = "speed_timer"
-    };
+static void configure_speed_calc_timer()
+{
+    const esp_timer_create_args_t periodic_timer_args = { .callback = &speed_timer_on_tick, .name = "speed_timer" };
 
     esp_timer_handle_t periodic_timer;
     ESP_ERROR_CHECK(esp_timer_create(&periodic_timer_args, &periodic_timer));
@@ -96,7 +96,8 @@ void app_main(void)
     configure_pulse_counter();
     configure_speed_calc_timer();
 
-    while (1) {
+    while (1)
+    {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
